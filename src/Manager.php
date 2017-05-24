@@ -5,6 +5,7 @@ use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RegexIterator;
+use JSMin\JSMin; 
 
 class Manager
 {
@@ -461,7 +462,7 @@ class Manager
 	{
 		// If a custom minifier has been set use it, otherwise fallback to default
 		$minifier = (isset($this->js_minifier)) ? $this->js_minifier : function ($buffer) {
-			return \JSMin::minify($buffer);
+			return JSMin::minify($buffer);
 		};
 
 		return $this->pipeline($this->js, '.js', $this->js_dir, $minifier);
